@@ -12,6 +12,7 @@ struct InputText: View {
     @State var captionInput: String = ""
     @State var text: String
     @FocusState private var commentFieldIsFocused: Bool
+    @Environment(ModelData.self) var modelData
 
     var body: some View {
         HStack {
@@ -35,6 +36,8 @@ struct InputText: View {
                 MiauButtonSend {
                     if !captionInput.isEmpty {
                         commentFieldIsFocused = false
+                        modelData.onNewCommentAdded(comment: captionInput)
+                        captionInput = ""
                     }
                 }
             }

@@ -29,7 +29,9 @@ struct CattoPostList: View {
             VStack {
                 ZStack {
                     ForEach(modelData.cattoPost) { catto in
-                        CattoPost(cattoPost: modelData.getCattoBinding(for: catto))
+                        CattoPost(cattoPost: modelData.getCattoBinding(for: catto))  {
+                            modelData.onSwipeOut()
+                        }
                     }
                 }
             }

@@ -11,6 +11,12 @@ struct CattoPost: View {
     @Environment(ModelData.self) var modelData
     @State private var offset: CGSize = .zero
     @Binding var cattoPost: Catto
+    let onSwipeOut: (() -> Void)?
+    
+    init(cattoPost: Binding<Catto>, onSwipeOut: (() -> Void)? = nil) {
+        self._cattoPost = cattoPost
+        self.onSwipeOut = onSwipeOut
+    }
 
     var body: some View {
         ScrollView(showsIndicators: false) {
@@ -65,8 +71,10 @@ struct CattoPost: View {
         switch width {
         case -500...(-145):
             offset = CGSize(width: -500, height: 0)
+            onSwipeOut?()
         case 145...500:
             offset = CGSize(width: 500, height: 0)
+            onSwipeOut?()
         default:
             offset = .zero
         }

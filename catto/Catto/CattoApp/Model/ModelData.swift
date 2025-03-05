@@ -35,6 +35,16 @@ class ModelData {
         return cattoPost.firstIndex(where: { $0.id == catto.id })
     }
 
+    func onNewCommentAdded(comment: String) -> Void {
+        let index = cattoPost.count - 1
+        let user = Catto.CattoUser(username: "Cris Messias", userImageUrl: "https://avatars.githubusercontent.com/u/6744444?v=4")
+        let caption = Catto.CattoCaption(id: 1, user: user, caption: comment, vote: 1, isMostVoted: false)
+        cattoPost[index].captionList.append(caption)
+    }
+    
+    func onSwipeOut() -> Void {
+        cattoPost.removeLast()
+    }
 }
 
 
